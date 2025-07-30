@@ -49,11 +49,66 @@
       <option value="500">Fast</option>
     </select>
 
-    <div id="bars" class="flex justify-center items-end mt-10 gap-1 h-64"></div>
+    <div class="flex flex-col lg:flex-row gap-8 mt-10 max-w-7xl mx-auto">
+      <!-- Algorithm Steps -->
+      <div class="lg:w-1/2 bg-white rounded-lg shadow-lg p-6">
+        <h2 class="text-xl font-bold mb-4 text-indigo-600">Linear Search Algorithm Steps</h2>
+        <div class="space-y-3 text-sm">
+          <div class="step-item border-l-4 border-blue-500 pl-4 py-2">
+            <h3 class="font-semibold">Step 1: Start from Beginning</h3>
+            <p>Begin searching from the first element of the array (index 0).</p>
+          </div>
+          <div class="step-item border-l-4 border-green-500 pl-4 py-2">
+            <h3 class="font-semibold">Step 2: Compare Elements</h3>
+            <p>Compare the current element with the target value you're searching for.</p>
+          </div>
+          <div class="step-item border-l-4 border-yellow-500 pl-4 py-2">
+            <h3 class="font-semibold">Step 3: Check Match</h3>
+            <p>If the current element matches the target, return the index (element found).</p>
+          </div>
+          <div class="step-item border-l-4 border-red-500 pl-4 py-2">
+            <h3 class="font-semibold">Step 4: Move to Next</h3>
+            <p>If no match, move to the next element and repeat the comparison.</p>
+          </div>
+          <div class="step-item border-l-4 border-purple-500 pl-4 py-2">
+            <h3 class="font-semibold">Step 5: Complete Search</h3>
+            <p>Continue until element is found or end of array is reached (element not found).</p>
+          </div>
+        </div>
+        <div class="mt-6 p-4 bg-gray-100 rounded">
+          <h3 class="font-semibold mb-2">Time Complexity:</h3>
+          <p><strong>Best Case:</strong> O(1) - element found at first position</p>
+          <p><strong>Average Case:</strong> O(n)</p>
+          <p><strong>Worst Case:</strong> O(n) - element at last position or not found</p>
+        </div>
+      </div>
+
+      <!-- Visualizer -->
+      <div class="lg:w-1/2">
+        <h2 class="text-xl font-bold mb-4 text-center">Visualization</h2>
+        <div id="bars" class="flex justify-center items-end gap-1 h-64 border rounded-lg bg-gray-50 p-4"></div>
+        <div class="mt-4 text-center">
+          <div class="flex justify-center gap-4 text-sm">
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-green-500 rounded"></div>
+              <span>Found</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4 bg-red-500 rounded"></div>
+              <span>Checking</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4" style="background-color: #4c51bf;"></div>
+              <span>Normal</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script>
-    const backendURL = "https://your-backend-url/search/linear"; // Update this
+    const backendURL = "https://6e0ae7bd-1d51-464b-84bd-88ed5dfd8e8a-00-2rdepn66tctsa.pike.replit.dev";
 
     function renderBars(array, highlightIndex = -1, found = false) {
       const container = document.getElementById("bars");
@@ -94,7 +149,7 @@
       }
 
       try {
-        const res = await fetch(backendURL, {
+        const res = await fetch(`${backendURL}/search/linear`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ array, target })
