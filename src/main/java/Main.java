@@ -79,7 +79,7 @@ public class Main {
     // Binary Search endpoint
     post("/search/binary", (req, res) -> {
       SearchRequest searchReq = gson.fromJson(req.body(), SearchRequest.class);
-      List<int[]> result = BinarySearch.getBinarySearch(searchReq.array, searchReq.target);
+      List<BinarySearch.SearchStep> result = BinarySearch.getBinarySearch(searchReq.array, searchReq.target);
       return gson.toJson(result);
     });
     }

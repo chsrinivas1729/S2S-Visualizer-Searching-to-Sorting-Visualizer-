@@ -18,15 +18,12 @@ public class LinearSearch {
         int[] a = arr.clone();
 
         for (int i = 0; i < a.length; i++) {
-            int[] marked = a.clone();
-            // Mark current index being checked by making it negative
-            marked[i] = -Math.abs(marked[i]);
-            sorted.add(new Sorted(marked, i, false));
+            // Send original array with current index
+            sorted.add(new Sorted(a.clone(), i, false));
 
             if (a[i] == target) {
-                // Mark found value by multiplying with 10000
-                marked[i] = target * 10000;
-                sorted.add(new Sorted(marked, i, true));
+                // Send original array with found index
+                sorted.add(new Sorted(a.clone(), i, true));
                 break;
             }
         }

@@ -102,8 +102,12 @@
               <span>Checking Middle</span>
             </div>
             <div class="flex items-center gap-2">
-              <div class="w-4 h-4" style="background-color: #4c51bf;"></div>
-              <span>Normal</span>
+              <div class="w-4 h-4" style="background-color: #818cf8;"></div>
+              <span>Search Range</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <div class="w-4 h-4" style="background-color: #6b7280;"></div>
+              <span>Out of Range</span>
             </div>
           </div>
         </div>
@@ -114,7 +118,7 @@
   <script>
     const backendURL = "https://6e0ae7bd-1d51-464b-84bd-88ed5dfd8e8a-00-2rdepn66tctsa.pike.replit.dev";
 
-    function renderBars(arr, mid = -1, found = false) {
+    function renderBars(arr, mid = -1, found = false, low = -1, high = -1) {
       const container = document.getElementById("bars");
       container.innerHTML = "";
       const max = Math.max(...arr);
@@ -129,8 +133,10 @@
 
         if (i === mid) {
           bar.style.backgroundColor = found ? "green" : "gold";
+        } else if (low !== -1 && high !== -1 && i >= low && i <= high) {
+          bar.style.backgroundColor = "#818cf8"; // Light blue for search range
         } else {
-          bar.style.backgroundColor = "#4c51bf";
+          bar.style.backgroundColor = "#6b7280"; // Gray for out of range
         }
 
         const label = document.createElement("div");
@@ -159,11 +165,12 @@
         });
 
         const steps = await res.json();
-        renderBars(array); // initial state
-        for (let i = 0; i < steps.length; i++) {
-          const step = steps[i];
+        renderBars(array, -1, false, 0, array.length - 1); // initial state
+        await new Promise(r => setTimeout(r, speed));
+
+        for (let step of steps) {
+          renderBars(step.array, step.mid, step.found, step.low, step.high);
           await new Promise(r => setTimeout(r, speed));
-          renderBars(array, step.mid, step.found);
           if (step.found) break;
         }
       } catch (err) {
