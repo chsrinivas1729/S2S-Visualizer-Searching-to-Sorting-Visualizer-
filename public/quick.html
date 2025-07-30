@@ -93,19 +93,19 @@
         <div class="space-y-3 text-sm">
           <div class="step-item border-l-4 border-blue-500 pl-4 py-2">
             <h3 class="font-semibold">Step 1: Choose Pivot</h3>
-            <p>Select a pivot element from the array (typically the last element).</p>
+            <p>Select a pivot element from the array (commonly the last element).</p>
           </div>
           <div class="step-item border-l-4 border-green-500 pl-4 py-2">
             <h3 class="font-semibold">Step 2: Partition Array</h3>
-            <p>Rearrange elements so that smaller elements are on the left of pivot and larger on the right.</p>
+            <p>Rearrange elements so that those smaller than pivot are on the left, larger on the right.</p>
           </div>
           <div class="step-item border-l-4 border-yellow-500 pl-4 py-2">
             <h3 class="font-semibold">Step 3: Place Pivot</h3>
-            <p>Place the pivot in its correct final position in the sorted array.</p>
+            <p>Move the pivot to its correct position in the sorted array.</p>
           </div>
           <div class="step-item border-l-4 border-red-500 pl-4 py-2">
-            <h3 class="font-semibold">Step 4: Recursive Sort</h3>
-            <p>Recursively apply the same process to the sub-arrays on left and right of pivot.</p>
+            <h3 class="font-semibold">Step 4: Recursively Sort</h3>
+            <p>Apply quick sort recursively to the sub-arrays on both sides of the pivot.</p>
           </div>
           <div class="step-item border-l-4 border-purple-500 pl-4 py-2">
             <h3 class="font-semibold">Step 5: Combine Results</h3>
@@ -116,7 +116,7 @@
           <h3 class="font-semibold mb-2">Time Complexity:</h3>
           <p><strong>Best Case:</strong> O(n log n)</p>
           <p><strong>Average Case:</strong> O(n log n)</p>
-          <p><strong>Worst Case:</strong> O(n²) - when pivot is always smallest/largest</p>
+          <p><strong>Worst Case:</strong> O(n²) - when pivot is always smallest or largest</p>
         </div>
       </div>
 
@@ -162,11 +162,11 @@
         bar.classList.add("relative", "transition-all", "duration-300", "rounded");
 
         if (swapIndices.includes(index)) {
-          bar.style.backgroundColor = "red";
+          bar.style.backgroundColor = "#ef4444"; // red
         } else if (compareIndices.includes(index)) {
-          bar.style.backgroundColor = "#EAB308"; // yellow-500
+          bar.style.backgroundColor = "#eab308"; // yellow
         } else {
-          bar.style.backgroundColor = "#4c51bf";
+          bar.style.backgroundColor = "#4c51bf"; // indigo
         }
 
         bar.style.border = "1px solid #333";

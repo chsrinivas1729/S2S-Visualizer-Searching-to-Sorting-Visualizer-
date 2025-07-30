@@ -99,15 +99,15 @@
         <div class="space-y-3 text-sm">
           <div class="step-item border-l-4 border-blue-500 pl-4 py-2">
             <h3 class="font-semibold">Step 1: Find Minimum Element</h3>
-            <p>Start from the first unsorted position and find the minimum element in the remaining unsorted array.</p>
+            <p>Find the smallest element in the unsorted portion of the array.</p>
           </div>
           <div class="step-item border-l-4 border-green-500 pl-4 py-2">
-            <h3 class="font-semibold">Step 2: Swap Elements</h3>
-            <p>Swap the found minimum element with the first element of the unsorted portion.</p>
+            <h3 class="font-semibold">Step 2: Swap with First Element</h3>
+            <p>Swap the minimum element with the first element of the unsorted portion.</p>
           </div>
           <div class="step-item border-l-4 border-yellow-500 pl-4 py-2">
             <h3 class="font-semibold">Step 3: Move Boundary</h3>
-            <p>Move the boundary of the unsorted subarray one element to the right.</p>
+            <p>Move the boundary of the sorted and unsorted portions one element to the right.</p>
           </div>
           <div class="step-item border-l-4 border-red-500 pl-4 py-2">
             <h3 class="font-semibold">Step 4: Repeat Process</h3>
@@ -115,7 +115,7 @@
           </div>
           <div class="step-item border-l-4 border-purple-500 pl-4 py-2">
             <h3 class="font-semibold">Step 5: Complete</h3>
-            <p>The algorithm is complete when no unsorted elements remain.</p>
+            <p>The algorithm is complete when all elements are in their correct positions.</p>
           </div>
         </div>
         <div class="mt-6 p-4 bg-gray-100 rounded">
@@ -168,11 +168,11 @@
         bar.classList.add("relative", "transition-all", "duration-300", "rounded");
 
         if (swapIndices.includes(index)) {
-          bar.style.backgroundColor = "red";
+          bar.style.backgroundColor = "#ef4444"; // red
         } else if (compareIndices.includes(index)) {
-          bar.style.backgroundColor = "#EAB308"; // yellow-500
+          bar.style.backgroundColor = "#eab308"; // yellow
         } else {
-          bar.style.backgroundColor = "#4c51bf";
+          bar.style.backgroundColor = "#4c51bf"; // indigo
         }
 
         bar.style.border = "1px solid #333";

@@ -99,7 +99,7 @@
         <div class="space-y-3 text-sm">
           <div class="step-item border-l-4 border-blue-500 pl-4 py-2">
             <h3 class="font-semibold">Step 1: Start from Second Element</h3>
-            <p>Begin with the second element (index 1) as the first element is considered sorted.</p>
+            <p>Begin with the second element (index 1) and consider the first element as already sorted.</p>
           </div>
           <div class="step-item border-l-4 border-green-500 pl-4 py-2">
             <h3 class="font-semibold">Step 2: Compare with Previous Elements</h3>
@@ -107,7 +107,7 @@
           </div>
           <div class="step-item border-l-4 border-yellow-500 pl-4 py-2">
             <h3 class="font-semibold">Step 3: Shift Elements</h3>
-            <p>Shift all larger elements one position to the right to make space for insertion.</p>
+            <p>Shift larger elements one position to the right to make space for the current element.</p>
           </div>
           <div class="step-item border-l-4 border-red-500 pl-4 py-2">
             <h3 class="font-semibold">Step 4: Insert Element</h3>
@@ -115,7 +115,7 @@
           </div>
           <div class="step-item border-l-4 border-purple-500 pl-4 py-2">
             <h3 class="font-semibold">Step 5: Repeat</h3>
-            <p>Repeat the process for all remaining elements until the array is fully sorted.</p>
+            <p>Move to the next element and repeat until all elements are processed.</p>
           </div>
         </div>
         <div class="mt-6 p-4 bg-gray-100 rounded">
@@ -168,11 +168,11 @@
         bar.classList.add("relative", "transition-all", "duration-300", "rounded");
 
         if (swapIndices.includes(index)) {
-          bar.style.backgroundColor = "red";
+          bar.style.backgroundColor = "#ef4444"; // red
         } else if (compareIndices.includes(index)) {
-          bar.style.backgroundColor = "#EAB308"; // yellow-500
+          bar.style.backgroundColor = "#eab308"; // yellow
         } else {
-          bar.style.backgroundColor = "#4c51bf";
+          bar.style.backgroundColor = "#4c51bf"; // indigo
         }
 
         bar.style.border = "1px solid #333";

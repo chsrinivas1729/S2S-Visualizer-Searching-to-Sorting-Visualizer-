@@ -58,24 +58,24 @@
         <h2 class="text-xl font-bold mb-4 text-indigo-600">Binary Search Algorithm Steps</h2>
         <div class="space-y-3 text-sm">
           <div class="step-item border-l-4 border-blue-500 pl-4 py-2">
-            <h3 class="font-semibold">Step 1: Array Must Be Sorted</h3>
-            <p>Binary search only works on sorted arrays. Ensure your input array is sorted.</p>
+            <h3 class="font-semibold">Step 1: Set Boundaries</h3>
+            <p>Initialize left boundary at index 0 and right boundary at array length - 1.</p>
           </div>
           <div class="step-item border-l-4 border-green-500 pl-4 py-2">
-            <h3 class="font-semibold">Step 2: Find Middle Element</h3>
-            <p>Calculate the middle index and compare the middle element with the target value.</p>
+            <h3 class="font-semibold">Step 2: Find Middle</h3>
+            <p>Calculate middle index: mid = (left + right) / 2.</p>
           </div>
           <div class="step-item border-l-4 border-yellow-500 pl-4 py-2">
-            <h3 class="font-semibold">Step 3: Eliminate Half</h3>
-            <p>If target is smaller than middle, search left half. If larger, search right half.</p>
+            <h3 class="font-semibold">Step 3: Compare with Target</h3>
+            <p>Compare the middle element with the target value.</p>
           </div>
           <div class="step-item border-l-4 border-red-500 pl-4 py-2">
-            <h3 class="font-semibold">Step 4: Repeat Process</h3>
-            <p>Repeat the process on the selected half until the target is found or search space is empty.</p>
+            <h3 class="font-semibold">Step 4: Adjust Search Space</h3>
+            <p>If target is smaller, search left half. If larger, search right half.</p>
           </div>
           <div class="step-item border-l-4 border-purple-500 pl-4 py-2">
-            <h3 class="font-semibold">Step 5: Return Result</h3>
-            <p>Return the index if found, or indicate that the element is not in the array.</p>
+            <h3 class="font-semibold">Step 5: Repeat or Conclude</h3>
+            <p>Repeat until target is found or search space is exhausted.</p>
           </div>
         </div>
         <div class="mt-6 p-4 bg-gray-100 rounded">
@@ -83,6 +83,7 @@
           <p><strong>Best Case:</strong> O(1) - element found at middle</p>
           <p><strong>Average Case:</strong> O(log n)</p>
           <p><strong>Worst Case:</strong> O(log n)</p>
+          <p class="mt-2 text-sm text-red-600"><strong>Note:</strong> Array must be sorted!</p>
         </div>
       </div>
 
