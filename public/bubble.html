@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
+  <title>S2S Visualizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .dark-mode {
+      background-color: #000;
+      color: #fff;
+    }
+    .dark-mode .bg-white,
+    .dark-mode .bg-blue-200 {
+      background-color: #1a1a1a !important;
+    }
+    .dark-mode .text-gray-800,
+    .dark-mode .text-indigo-600,
+    .dark-mode .text-gray-600 {
+      color: #e5e5e5 !important;
+    }
+    .dark-mode .hover\:bg-black:hover {
+      background-color: #333 !important;
+    }
+    .dark-mode .hover\:text-white:hover {
+      color: #fff !important;
+    }
+    .dark-mode .bg-gray-800 {
+      background-color: #000;
+    }
+    .toggle-switch {
+      width: 50px;
+      height: 26px;
+      background: #ccc;
+      border-radius: 9999px;
+      position: relative;
+      cursor: pointer;
+    }
+    .toggle-switch::before {
+      content: "\1F319";
+      font-size: 16px;
+      position: absolute;
+      left: 4px;
+      top: 3px;
+      transition: transform 0.3s ease;
+    }
+    .dark-mode .toggle-switch::before {
+      content: "\2600";
+      transform: translateX(24px);
+    }
+  </style>
+</head>
+<body class="bg-blue-200 text-gray-800 transition-colors duration-300">
+
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <div>
+      <a href="index.html">
+        <h1 class="text-2xl font-bold text-indigo-600 leading-tight">S2S Visualizer</h1>
+        <p class="text-sm text-gray-600">Sorting and Searching Visualizer</p>
+      </a>
+    </div>
+    <div id="darkModeToggle" class="toggle-switch"></div>
+  </nav>
+
+  <!-- Content -->
+  <div class="text-center p-6">
+    <h1 class="text-2xl font-bold mb-4">Bubble Sort Visualizer</h1>
+    <input
+      id="inputArray"
+      type="text"
+      placeholder="Enter comma-separated numbers"
+      class="p-2 rounded border"
+    />
+    <button
+      onclick="startSort()"
+      class="bg-indigo-600 text-white px-4 py-2 rounded ml-2"
+    >
+      Sort
+    </button>
+    <label for="speedSelect" class="ml-4 font-medium">Speed:</label>
+    <select id="speedSelect" class="p-2 rounded border ml-2">
+      <option value="2000">Slow</option>
+      <option value="1000" selected>Medium</option>
+      <option value="500">Fast</option>
+    </select>
+
+    <div id="bars" class="flex justify-center items-end mt-10 gap-1 h-64"></div>
+  </div>
+
+  <script>
+    const backendURL = "https://6e0ae7bd-1d51-464b-84bd-88ed5dfd8e8a-00-2rdepn66tctsa.pike.replit.dev";
+
+    function renderBars(arr, compareIndices = [], swapIndices = []) {
+      const container = document.getElementById("bars");
+      container.innerHTML = "";
+
+      const max = Math.max(...arr);
+      const barWidth = Math.max(10, Math.floor(600 / arr.length));
+      const scale = 200 / max;
+
+      arr.forEach((value, index) => {
+        const bar = document.createElement("div");
+        bar.style.height = `${value * scale}px`;
+        bar.style.width = `${barWidth}px`;
+        bar.classList.add("relative", "transition-all", "duration-300", "rounded");
+
+        if (swapIndices.includes(index)) {
+          bar.style.backgroundColor = "red";
+        } else if (compareIndices.includes(index)) {
+          bar.style.backgroundColor = "gold";
+        } else {
+          bar.style.backgroundColor = "#4c51bf";
+        }
+
+        bar.style.border = "1px solid #333";
+
+        const label = document.createElement("div");
+        label.textContent = value;
+        label.className = "absolute -top-6 text-xs w-full text-center font-semibold";
+        bar.appendChild(label);
+
+        container.appendChild(bar);
+      });
+    }
+
+    async function startSort() {
+      const input = document.getElementById("inputArray").value.trim();
+      const speed = parseInt(document.getElementById("speedSelect").value);
+      const array = input.split(",").map(Number).filter(x => !isNaN(x));
+
+      if (array.length === 0) {
+        alert("Please enter valid comma-separated numbers.");
+        return;
+      }
+
+      try {
+        const res = await fetch(`${backendURL}/sort/bubble`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(array)
+        });
+
+        const sorted = await res.json();
+
+        for (let i = 0; i < sorted.length; i++) {
+          const curr = sorted[i];
+          const prev = i > 0 ? sorted[i - 1] : [...curr];
+          const swap = [];
+
+          for (let j = 0; j < curr.length; j++) {
+            if (curr[j] !== prev[j]) swap.push(j);
+          }
+
+          renderBars(curr, [], swap);
+          await new Promise(r => setTimeout(r, speed));
+        }
+      } catch (err) {
+        console.error("Error fetching from backend:", err);
+        alert("Something went wrong. Check the console.");
+      }
+    }
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    darkModeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark-mode");
+    });
+  </script>
+
+</body>
+</html>

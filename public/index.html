@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>S2S Visualizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .dark-mode {
+      background-color: #000;
+      color: #fff;
+    }
+    .dark-mode .bg-white,
+    .dark-mode .bg-blue-300 {
+      background-color: #1a1a1a !important;
+    }
+    .dark-mode .text-gray-800,
+    .dark-mode .text-indigo-700,
+    .dark-mode .text-gray-600 {
+      color: #e5e5e5 !important;
+    }
+    .dark-mode .hover\:bg-black:hover {
+      background-color: #333 !important;
+    }
+    .dark-mode .hover\:text-white:hover {
+      color: #fff !important;
+    }
+    .dark-mode .bg-gray-800 {
+      background-color: #000;
+    }
+    .toggle-switch {
+      width: 50px;
+      height: 26px;
+      background: #ccc;
+      border-radius: 9999px;
+      position: relative;
+      cursor: pointer;
+    }
+    .toggle-switch::before {
+      content: "\1F319";
+      font-size: 16px;
+      position: absolute;
+      left: 4px;
+      top: 3px;
+      transition: transform 0.3s ease;
+    }
+    .dark-mode .toggle-switch::before {
+      content: "\2600";
+      transform: translateX(24px);
+    }
+  </style>
+</head>
+
+<body class="bg-blue-200 text-gray-800 transition-colors duration-300">
+  <!-- Navbar -->
+  <nav class="bg-white shadow-md p-4 flex justify-between items-center">
+    <div>
+      <a href="index.html">
+        <h1 class="text-2xl font-bold text-indigo-600 leading-tight">S2S Visualizer</h1>
+        <p class="text-sm text-gray-600">Sorting and Searching Visualizer</p>
+      </a>
+    </div>
+    <div id="darkModeToggle" class="toggle-switch"></div>
+  </nav>
+
+  <!-- Info Section -->
+  <section class="bg-blue-300 py-8 px-6">
+    <div class="max-w-4xl mx-auto text-left">
+      <p class="text-lg text-gray-800">Explore different sorting and searching algorithms with step-by-step animations. Choose your algorithm to visualize how it works in real-time, helping you understand their inner workings better.</p>
+    </div>
+  </section>
+
+  <!-- Sorting Section -->
+  <section id="sorting" class="bg-blue-300 py-10 px-6">
+    <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">Sorting Algorithms</h2>
+    <div class="flex justify-center flex-wrap gap-6">
+      <a href="bubble.html" class="algo-link">Bubble Sort</a>
+      <a href="selection.html" class="algo-link">Selection Sort</a>
+      <a href="insertion.html" class="algo-link">Insertion Sort</a>
+      <a href="quick.html" class="algo-link">Quick Sort</a>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section id="searching" class="bg-blue-300 py-10 px-6">
+    <h2 class="text-2xl font-semibold text-gray-800 text-center mb-6">Search Algorithms</h2>
+    <div class="flex justify-center flex-wrap gap-6">
+      <a href="linear.html" class="algo-link">Linear Search</a>
+      <a href="binary.html" class="algo-link">Binary Search</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white py-6">
+    <div class="flex justify-center space-x-6">
+      <a href="https://www.linkedin.com/in/srinivas-siva-surya-chitneedi-4ba0b2258/" target="_blank" class="hover:text-blue-400">
+        <i class="fab fa-linkedin fa-2x"></i>
+      </a>
+      <a href="https://github.com/chsrinivas1729" target="_blank" class="hover:text-gray-400">
+        <i class="fab fa-github fa-2x"></i>
+      </a>
+      <a href="https://chsrinivas1729.github.io/Portfolio/" target="_blank" class="hover:text-pink-400">
+        <i class="fas fa-globe fa-2x"></i>
+      </a>
+    </div>
+    <p class="text-center text-sm mt-4 mb-0">&copy; 2025 Srinivas Siva Surya Chitneedi. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const toggle = document.getElementById('darkModeToggle');
+    const darkClass = 'dark-mode';
+
+    // Apply mode from localStorage
+    if (localStorage.getItem('darkMode') === 'enabled') {
+      document.body.classList.add(darkClass);
+    }
+
+    toggle.addEventListener('click', () => {
+      document.body.classList.toggle(darkClass);
+      if (document.body.classList.contains(darkClass)) {
+        localStorage.setItem('darkMode', 'enabled');
+      } else {
+        localStorage.setItem('darkMode', 'disabled');
+      }
+    });
+  </script>
+
+  <style>
+    .algo-link {
+      display: inline-block;
+      text-align: center;
+      width: 180px;
+      padding: 12px 20px;
+      background: white;
+      color: #4c51bf;
+      border-radius: 12px;
+      font-weight: 600;
+      transition: 0.3s;
+      border: 1px solid #c3dafe;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .algo-link:hover {
+      background: black;
+      color: white;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+</body>
+
+</html>
